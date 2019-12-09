@@ -1,6 +1,9 @@
 package hackathon.totalvoice.schedulemanager.controller;
 
+import hackathon.totalvoice.schedulemanager.dto.CustomerResponse;
 import hackathon.totalvoice.schedulemanager.model.Customer;
+import hackathon.totalvoice.schedulemanager.service.CustomerService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -8,9 +11,12 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/v1/customer")
 public class CustomerController {
 
+    @Autowired
+    private CustomerService customerService;
+
     @PostMapping
-    public Customer createCustomer(@RequestBody Customer profissional){
-        return new Customer();
+    public CustomerResponse createCustomer(@RequestBody Customer customer){
+        return customerService.createCustomer(customer);
     }
 
     @GetMapping
